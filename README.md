@@ -1,6 +1,6 @@
 # Synthetic data generator
 
-Infrastructure and application providing a synthetic database
+Application that generates synthetic data for BigData concept proofs. Provides relational (postgres), nonrelational (mongodb) and streaming data with Kafka. The infra is built based on containers.
 ### Architecture
 ![Architecture](https://github.com/DataGenPoc/synthetic-data-generator/blob/master/docs/architecture.jpg?raw=true)
 
