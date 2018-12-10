@@ -10,7 +10,7 @@ collections_name = ["BASECOMPRASPDV_DDL",
                     "SELLOUT_TB_LOJA_VENDA_SO_DDL"]
 
 
-def run_kafka_publisher(delay=5):
+def run_kafka_publisher(delay=1):
     print("-- INIT KAFKA --")
     kafka_client = KafkaClient()
 
@@ -25,4 +25,3 @@ def run_kafka_publisher(delay=5):
 
         time.sleep(delay)
         print("-- KAFKA RUNNING... --")
-pocDataGen18
