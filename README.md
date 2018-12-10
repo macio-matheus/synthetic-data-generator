@@ -2,7 +2,7 @@
 
 Infrastructure and application providing a synthetic database, for proof of concept of Boticário Data Lake Project
 ### Architecture
-![Architecture](https://innersource.accenture.com/projects/BOTDATAPOC/repos/boticario-synthetic-database/raw/docs/architecture.jpg?at=refs%2Fheads%2Fmaster)
+![Architecture](https://github.com/DataGenPoc/synthetic-data-generator/blob/master/docs/architecture.jpg?raw=true)
 
 
 ### Structure of the project
