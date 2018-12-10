@@ -16,7 +16,7 @@ Esta tabela NAO ira receber dados novos, serao carregados com um dump e nao sera
 */
 
 CREATE TABLE CA_CICLOS_DDL(
-	ID				SERIAL,
+	ID		SERIAL,
 	COD_UN_NEGOCIO   VARCHAR(50),
 	NR_CICLO         VARCHAR(50),
 	DT_FIM_CICLO     VARCHAR(50),
@@ -27,13 +27,13 @@ CREATE TABLE CA_CICLOS_DDL(
 
 ALTER TABLE CA_CICLOS_DDL ADD CONSTRAINT CA_CICLOS_DDL_PK PRIMARY KEY ( ID );
 
-
 /*
 BASECOMPRASPDV_DDL
 Tabela que mantem a associacao entre venda, loja e consumidor considerando PDV (ponto de venda)
+Essa tabela sera utilizada para a carga Batch
 */
 CREATE TABLE BASECOMPRASPDV_DDL(
-	ID						  SERIAL,
+	ID		SERIAL,
 	CPF                  VARCHAR(14),
 	COD_GRUPO_FRANQUIA   VARCHAR(10),
 	CD_LOJA              VARCHAR(10),
@@ -75,6 +75,7 @@ ALTER TABLE BASECOMPRASPDV_DDL ADD CONSTRAINT BASECOMPRASPDV_DDL_PK PRIMARY KEY 
 /*
 BASECONSUMIDOR_BOT_DDL
 Tabela que mantem os dados dos consumidores
+Essa tabela sera utilizada para a carga Batch
 */
 CREATE TABLE BASECONSUMIDOR_BOT_DDL(
 	ID						  SERIAL,
@@ -146,6 +147,7 @@ ALTER TABLE BASECONSUMIDOR_BOT_DDL ADD CONSTRAINT BASECONSUMIDOR_BOT_DDL_PK PRIM
 /*
 SELLOUT_TB_LOJA_VENDA_SO_DDL
 Tabela que mantem os registros associando vendas a lojas
+Essa tabela sera utilizada para a carga Batch
 */
 
 CREATE TABLE SELLOUT_TB_LOJA_VENDA_SO_DDL(
@@ -181,16 +183,16 @@ ALTER TABLE SELLOUT_TB_LOJA_VENDA_SO_DDL ADD CONSTRAINT SELLOUT_TB_LOJA_VENDA_SO
 
 /*
 BASECOMPRASECM_DDL
-Tabela que mantem a associacao entre venda, loja e consumidor
+Tabela que mantem a associacao entre venda, loja e consumidor para ECM (campanha especial do boticario)
 Esta tabela recebera constantemente os dados do gerador
 */
 
 
 CREATE TABLE BASECOMPRASECM_DDL(
-	ID						  SERIAL,
-	CPF                  VARCHAR(11),
+	ID		     SERIAL,
+	CPF                  VARCHAR(15),
 	CD_PRODUTO           VARCHAR(18),
-	DS_UNIDADE_NEGOCIO   VARCHAR(3),
+	DS_UNIDADE_NEGOCIO   VARCHAR(30),
 	DT_VENDA             VARCHAR(50),
 	NR_CUPOM             BIGINT,
 	CD_LOJA              VARCHAR(10),
@@ -199,9 +201,9 @@ CREATE TABLE BASECOMPRASECM_DDL(
 	ID_VENDEDOR          VARCHAR(20),
 	NR_ATENDIMENTO       BIGINT,
 	DES_MATERIAL         VARCHAR(40),
-	COD_MARCA            VARCHAR(4),
+	COD_MARCA            VARCHAR(50),
 	DES_MARCA            VARCHAR(40),
-	COD_LINHA            VARCHAR(10),
+	COD_LINHA            VARCHAR(50),
 	COD_CATEGORIA        VARCHAR(18),
 	DES_CATEGORIA        VARCHAR(40),
 	COD_SUBCATEGORIA     VARCHAR(18),
