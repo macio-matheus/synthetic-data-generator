@@ -34,7 +34,7 @@ General variables: Must be defined in an ".env" file at the project root
     POSTGRES_USER=foo
     QUANTIY_RECORDS=10
     QUANTIY_RECORDS_NOISE_PERCENT=30
-    PROVIDER = ["AZURE", "AWS"]
+    PROVIDER = <PROVIDER_NAME>
     KAFKA_RETENTION_MS=86400000
  
 #### 
