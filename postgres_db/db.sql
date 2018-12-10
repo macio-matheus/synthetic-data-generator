@@ -9,8 +9,14 @@ CREATE DATABASE boticario
 
 \c boticario
 
+/*
+CA_CICLOS_DDL
+Esta tabela mantem informacoes sobre os ciclos de venda, periodos onde ocorrem campanhas com preços promocionais dos produtos
+Esta tabela NAO ira receber dados novos, serao carregados com um dump e nao sera modificada novamente
+*/
+
 CREATE TABLE CA_CICLOS_DDL(
-	ID				SERIAL,
+	ID		SERIAL,
 	COD_UN_NEGOCIO   VARCHAR(50),
 	NR_CICLO         VARCHAR(50),
 	DT_FIM_CICLO     VARCHAR(50),
@@ -21,6 +27,11 @@ CREATE TABLE CA_CICLOS_DDL(
 
 ALTER TABLE CA_CICLOS_DDL ADD CONSTRAINT CA_CICLOS_DDL_PK PRIMARY KEY ( ID );
 
+/*
+BASECOMPRASPDV_DDL
+Tabela que mantem a associacao entre venda, loja e consumidor considerando PDV (ponto de venda)
+Essa tabela sera utilizada para a carga Batch
+*/
 CREATE TABLE BASECOMPRASPDV_DDL(
 	ID						  SERIAL,
 	CPF                  VARCHAR(14),
@@ -60,6 +71,12 @@ CREATE TABLE BASECOMPRASPDV_DDL(
 
 ALTER TABLE BASECOMPRASPDV_DDL ADD CONSTRAINT BASECOMPRASPDV_DDL_PK PRIMARY KEY ( ID );
 
+
+/*
+BASECONSUMIDOR_BOT_DDL
+Tabela que mantem os dados dos consumidores
+Essa tabela sera utilizada para a carga Batch
+*/
 CREATE TABLE BASECONSUMIDOR_BOT_DDL(
 	ID						  SERIAL,
 	CPF                                 VARCHAR(50),
@@ -127,6 +144,11 @@ CREATE TABLE BASECONSUMIDOR_BOT_DDL(
 
 ALTER TABLE BASECONSUMIDOR_BOT_DDL ADD CONSTRAINT BASECONSUMIDOR_BOT_DDL_PK PRIMARY KEY ( ID );
 
+/*
+SELLOUT_TB_LOJA_VENDA_SO_DDL
+Tabela que mantem os registros associando vendas a lojas
+Essa tabela sera utilizada para a carga Batch
+*/
 
 CREATE TABLE SELLOUT_TB_LOJA_VENDA_SO_DDL(
 	ID						  SERIAL,
@@ -159,6 +181,13 @@ CREATE TABLE SELLOUT_TB_LOJA_VENDA_SO_DDL(
 
 ALTER TABLE SELLOUT_TB_LOJA_VENDA_SO_DDL ADD CONSTRAINT SELLOUT_TB_LOJA_VENDA_SO_PK PRIMARY KEY ( ID );
 
+/*
+BASECOMPRASECM_DDL
+Tabela que mantem a associacao entre venda, loja e consumidor para ECM (campanha especial do boticario)
+Esta tabela recebera constantemente os dados do gerador
+*/
+
+
 CREATE TABLE BASECOMPRASECM_DDL(
 	ID				     SERIAL,
 	CPF                  VARCHAR(50),
@@ -172,7 +201,7 @@ CREATE TABLE BASECOMPRASECM_DDL(
 	ID_VENDEDOR          VARCHAR(20),
 	NR_ATENDIMENTO       BIGINT,
 	DES_MATERIAL         VARCHAR(40),
-	COD_MARCA            VARCHAR(50),
+	COD_MARCA            VARCHAR(4),
 	DES_MARCA            VARCHAR(40),
 	COD_LINHA            VARCHAR(50),
 	COD_CATEGORIA        VARCHAR(18),
@@ -191,6 +220,7 @@ CREATE TABLE BASECOMPRASECM_DDL(
 ALTER TABLE BASECOMPRASECM_DDL ADD CONSTRAINT BASECOMPRASECM_DDL_PK PRIMARY KEY ( ID );
 
 
+/* inserts para a tabela de ciclo */
 insert into CA_CICLOS_DDL (COD_UN_NEGOCIO, NR_CICLO, DT_FIM_CICLO, DT_INI_CICLO, DES_CICLO, DUMMY) values ('uni5', 1, '2016-01-22 00:00:01', '2016-01-01 00:00:01', 'Porro excepturi quia ab ratione.', 9061);
 insert into CA_CICLOS_DDL (COD_UN_NEGOCIO, NR_CICLO, DT_FIM_CICLO, DT_INI_CICLO, DES_CICLO, DUMMY) values ('uni2', 2, '2016-02-12 00:00:01', '2016-01-22 00:00:01', 'Architecto praesentium eum ex dolores enim.', 5793);
 insert into CA_CICLOS_DDL (COD_UN_NEGOCIO, NR_CICLO, DT_FIM_CICLO, DT_INI_CICLO, DES_CICLO, DUMMY) values ('uni6', 3, '2016-03-04 00:00:01', '2016-02-12 00:00:01', 'Temporibus iste rem eveniet accusantium.', 4071);
