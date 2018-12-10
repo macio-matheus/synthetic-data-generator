@@ -22,20 +22,20 @@ In the Kafka configuration, it is necessary to inform the local ip of your host 
 
 General variables: Must be defined in an ".env" file at the project root
 
-    - KAFKA_HOST=<kafka_advertised_host_name>:<kafka_advertised_port>
-    - KAFKA_ADVERTISED_HOST_NAME=<your-local-ip>
-    - KAFKA_ADVERTISED_PORT=9092
-    - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
-    - KAFKA_CREATE_TOPICS=messages:1:1
-    - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-    - MONGO_INITDB_ROOT_USERNAME=foo
-    - MONGO_INITDB_ROOT_PASSWORD=foo
-    - POSTGRES_PASSWORD=foo
-    - POSTGRES_USER=foo
-    - QUANTIY_RECORDS=10
-    - QUANTIY_RECORDS_NOISE_PERCENT=30
-    - PROVIDER = ["AZURE", "AWS"]
-    - KAFKA_RETENTION_MS=86400000
+    KAFKA_HOST=<kafka_advertised_host_name>:<kafka_advertised_port>
+    KAFKA_ADVERTISED_HOST_NAME=<your-local-ip>
+    KAFKA_ADVERTISED_PORT=9092
+    KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+    KAFKA_CREATE_TOPICS=messages:1:1
+    KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    MONGO_INITDB_ROOT_USERNAME=foo
+    MONGO_INITDB_ROOT_PASSWORD=foo
+    POSTGRES_PASSWORD=foo
+    POSTGRES_USER=foo
+    QUANTIY_RECORDS=10
+    QUANTIY_RECORDS_NOISE_PERCENT=30
+    PROVIDER = ["AZURE", "AWS"]
+    KAFKA_RETENTION_MS=86400000
  
 #### 
 ```sh
