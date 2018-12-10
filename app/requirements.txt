@@ -1,0 +1,7 @@
+kafka-python
+Faker==1.0.0
+pandas==0.22.0
+numpy==1.14.3
+jupyter
+pymongo==3.6.1
+psycopg2

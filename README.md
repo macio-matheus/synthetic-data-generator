@@ -1,1 +1,57 @@
-# synthetic-data-generator
+# Boticário synthetic database
+
+Infrastructure and application providing a synthetic database, for proof of concept of Boticário Data Lake Project
+### Architecture
+![Architecture](https://innersource.accenture.com/projects/BOTDATAPOC/repos/boticario-synthetic-database/raw/docs/architecture.jpg?at=refs%2Fheads%2Fmaster)
+
+
+### Structure of the project
+      - data-generator : Contains the script responsible for generating synthetic data        
+      - data-publisher : Contains the script responsible for generating the data stream
+      - docker-compose.yml : Orchestration of the application
+ 
+
+#### Environment
+In the data-generator and data-publisher containers, you need to identify the local IP of your host machine and the Kafka port.
+
+    - KAFKA_HOST: <kafka_advertised_host_name>:<kafka_advertised_port>
+ 
+In the Kafka configuration, it is necessary to inform the local ip of your host machine.
+
+    - KAFKA_ADVERTISED_HOST_NAME: <your-local-ip>
+
+General variables: Must be defined in an ".env" file at the project root
+
+    - KAFKA_HOST=<kafka_advertised_host_name>:<kafka_advertised_port>
+    - KAFKA_ADVERTISED_HOST_NAME=<your-local-ip>
+    - KAFKA_ADVERTISED_PORT=9092
+    - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+    - KAFKA_CREATE_TOPICS=messages:1:1
+    - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    - MONGO_INITDB_ROOT_USERNAME=foo
+    - MONGO_INITDB_ROOT_PASSWORD=foo
+    - POSTGRES_PASSWORD=foo
+    - POSTGRES_USER=foo
+    - QUANTIY_RECORDS=10
+    - QUANTIY_RECORDS_NOISE_PERCENT=30
+    - PROVIDER = ["AZURE", "AWS"]
+    - KAFKA_RETENTION_MS=86400000
+ 
+#### 
+```sh
+cd boticario-synthetic-database
+docker-compose up -d --build
+```
+   
+#### Run with docker compose
+```sh
+cd boticario-synthetic-database
+docker-compose up -d --build
+```
+
+#### Ports
+```sh
+    - 5432 => Postgres
+    - 5433 => Postgres admin
+    - 27017 => MongoDB
+```

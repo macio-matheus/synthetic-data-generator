@@ -1,0 +1,76 @@
+# Docker Compose Definitions for local Developer Environment
+version: '3'
+
+services:
+
+  postgres:
+    container_name: db_postgres
+    build:
+      context: ./postgres_db
+      dockerfile: Dockerfile
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+    - .env
+
+  postgres-admin:
+    container_name: db_postgres_admin
+    build:
+      context: ./postgres_db
+      dockerfile: Dockerfile-admin
+    hostname: postgres_admin
+    ports:
+    - "5433:5432"
+    env_file:
+    - .env
+
+  mongo:
+    container_name: db_mongo
+    image: mongo:3.4.2
+    hostname: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+    - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+    command: mongod --smallfiles
+    env_file:
+    - .env
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    expose:
+      - 2181
+    env_file:
+    - .env
+
+  kafka:
+    image: wurstmeister/kafka:0.10.1.0
+    ports:
+      - "9092:9092"
+    depends_on:
+    - zookeeper
+    expose:
+      - 9092
+    env_file:
+    - .env
+
+  data-generator-publisher:
+    container_name: data_generator_publisher
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: python main.py # tail -f /dev/null
+    working_dir: /app
+    ports:
+      - "5556:8080"
+    volumes:
+    - ./app:/app
+    depends_on:
+    - postgres
+    - mongo
+    - kafka
+    env_file:
+    - .env
