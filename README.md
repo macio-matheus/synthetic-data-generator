@@ -1,6 +1,6 @@
-# Boticário synthetic database
+# Synthetic data generator
 
-Infrastructure and application providing a synthetic database, for proof of concept of Boticário Data Lake Project
+Infrastructure and application providing a synthetic database
 ### Architecture
 ![Architecture](https://github.com/DataGenPoc/synthetic-data-generator/blob/master/docs/architecture.jpg?raw=true)
 
