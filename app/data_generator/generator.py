@@ -378,7 +378,7 @@ lista_linha = []
 lista_categoria = []
 lista_subcategoria = []
 
-for x in range(1, 10):
+for x in range(1, 30):
     lista_produtos.append('prod' + str(x))
     lista_lojas.append('shop' + str(x))
     lista_un_negocio.append('uni' + str(x))
