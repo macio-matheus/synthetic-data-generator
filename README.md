@@ -39,13 +39,13 @@ General variables: Must be defined in an ".env" file at the project root
  
 #### 
 ```sh
-cd boticario-synthetic-database
+cd synthetic-data-generator
 docker-compose up -d --build
 ```
    
 #### Run with docker compose
 ```sh
-cd boticario-synthetic-database
+cd synthetic-data-generator
 docker-compose up -d --build
 ```
 
@@ -54,4 +54,12 @@ docker-compose up -d --build
     - 5432 => Postgres
     - 5433 => Postgres admin
     - 27017 => MongoDB
+    - 9092 => Kafka
+```
+
+#### Topics
+```sh
+    BASECOMPRASPDV_DDL
+    BASECONSUMIDOR_BOT_DDL
+    SELLOUT_TB_LOJA_VENDA_SO_DDL
 ```
