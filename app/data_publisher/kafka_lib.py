@@ -18,13 +18,13 @@ class KafkaClient(object):
         consumer = KafkaConsumer(topic,
                                  bootstrap_servers=[self._host],
                                  enable_auto_commit=True,
-                                 auto_offset_reset='latest',
+                                 auto_offset_reset='earliest',
                                  auto_commit_interval_ms=500)
         return consumer
 
     def send_message(self, topic, message):
         producer = KafkaProducer(bootstrap_servers=self._host,
-                                 retries=5, api_version=(0, 10, 1))
+                                 retries=5)
         producer.send(topic, message.encode())
         producer.flush()
         producer.close()

@@ -2,11 +2,9 @@ import os
 
 import psycopg2
 
-print("Connection postgres started: ")
-conn_prod = psycopg2.connect(host='postgres', database='boticario',
+conn_prod = psycopg2.connect(host='postgres', database=os.environ['POSTGRES_DB_NAME'],
                              user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
 
-print("Connection postgres-admin started: ")
 conn_admin = psycopg2.connect(host='postgres-admin', database='boticario_admin',
                               user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
 

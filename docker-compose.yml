@@ -40,20 +40,16 @@ services:
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
-      - "2181:2181"
-    expose:
-      - 2181
+    - "2181:2181"
     env_file:
     - .env
 
   kafka:
     image: wurstmeister/kafka:0.10.1.0
     ports:
-      - "9092:9092"
-    depends_on:
-    - zookeeper
+    - "9092:9092"
     expose:
-      - 9092
+    - 9092
     env_file:
     - .env
 
@@ -62,7 +58,7 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
-    command: python main.py # tail -f /dev/null
+    command: python main.py
     working_dir: /app
     ports:
       - "5556:8080"
@@ -70,7 +66,9 @@ services:
     - ./app:/app
     depends_on:
     - postgres
+    - postgres-admin
     - mongo
     - kafka
+    - zookeeper
     env_file:
     - .env
