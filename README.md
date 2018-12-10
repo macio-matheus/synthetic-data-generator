@@ -36,6 +36,8 @@ General variables: Must be defined in an ".env" file at the project root
     QUANTIY_RECORDS_NOISE_PERCENT=30
     PROVIDER = <PROVIDER_NAME>
     KAFKA_RETENTION_MS=86400000
+    POSTGRES_DB_NAME=foo
+    MONGO_DB_NAME=foo
  
 #### 
 ```sh
