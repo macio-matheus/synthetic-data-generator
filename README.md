@@ -12,7 +12,7 @@ Application that generates synthetic data for BigData concept proofs. Provides r
  
 
 #### Environment
-In the data-generator and data-publisher containers, you need to identify the local IP of your host machine and the Kafka port.
+In the data-generator and data-publisher containers, you need to identify the local IP of your host machine and the Kafka port. Look this: https://github.com/wurstmeister/kafka-docker/blob/master/README.md#advertised-hostname
 
     - KAFKA_HOST: <kafka_advertised_host_name>:<kafka_advertised_port>
  
