@@ -21,7 +21,7 @@ def query_prod(query):
     conn_prod.commit()
     object_cursor.close()
 
-    print(f'Query finish: [{query}]')
+    # print(f'Query finish: [{query}]')
 
     return result
 
@@ -38,6 +38,6 @@ def query_admin(query):
     conn_admin.commit()
     object_cursor.close()
 
-    print(f'Query finish: [{query}]')
+    # print(f'Query finish: [{query}]')
 
     return result
