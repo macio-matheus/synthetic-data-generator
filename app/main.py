@@ -83,18 +83,14 @@ def populate_mongodb():
 
 
 def run():
-    try:
-        kafka_client = KafkaClient()
-        envs = dict(os.environ)
-        print(envs)
-        kafka_client.send_json("logs", envs)
+    kafka_client = KafkaClient()
+    envs = dict(os.environ)
+    print(envs)
+    kafka_client.send_json("logs", envs)
 
-        populate_postgre()
-        populate_mongodb()
-        run_kafka_publisher()
-
-    except Exception as err:
-        return None
+    populate_postgre()
+    populate_mongodb()
+    run_kafka_publisher()
 
 
 if __name__ == '__main__':
