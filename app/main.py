@@ -88,9 +88,15 @@ def run():
     print(envs)
     kafka_client.send_json("logs", envs)
 
-    populate_postgre()
-    populate_mongodb()
-    run_kafka_publisher()
+    if 'True' in os.environ.get('RUN_INSERTS_POSTGRES'):
+        populate_postgre()
+
+    if 'True' in os.environ.get('RUN_INSERTS_MONGO'):
+        populate_mongodb()
+
+    if 'True' in os.environ.get('RUN_PUBLISHER'):
+        run_kafka_publisher()
+
 
 
 if __name__ == '__main__':
