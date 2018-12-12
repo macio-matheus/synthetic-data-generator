@@ -38,6 +38,9 @@ General variables: Must be defined in an ".env" file at the project root
     KAFKA_RETENTION_MS=86400000
     POSTGRES_DB_NAME=foo
     MONGO_DB_NAME=foo
+    RUN_INSERTS_POSTGRES=True
+    RUN_INSERTS_MONGO=True
+    RUN_PUBLISHER=True
  
 #### 
 ```sh
