@@ -24,7 +24,6 @@ QUANTITY_RECORDS_PER_TABLE = int(os.environ['QUANTIY_RECORDS'])
 QUANTITY_RECORDS_WITH_NOISE_PER_TABLE = int(
     (QUANTITY_RECORDS_PER_TABLE * int(os.environ['QUANTIY_RECORDS_NOISE_PERCENT'])) / 100)
 
-np.random.seed(0)
 noise_threshold = 0.3
 
 
@@ -38,15 +37,15 @@ def populate_postgre():
 
     tables_name = ['BASECOMPRASPDV_DDL', 'SELLOUT_TB_LOJA_VENDA_SO_DDL', 'BASECONSUMIDOR_BOT_DDL',
                    'BASECOMPRASECM_DDL']
-    tables = [BASECOMPRASPDV_DDL(), SELLOUT_TB_LOJA_VENDA_SO_DDL(), BASECONSUMIDOR_BOT_DDL(), BASECOMPRASECM_DDL()]
+    tables = [BASECOMPRASPDV_DDL, SELLOUT_TB_LOJA_VENDA_SO_DDL, BASECONSUMIDOR_BOT_DDL, BASECOMPRASECM_DDL]
     noise = False
 
     for index, t in enumerate(tables):
         for i in range(QUANTITY_RECORDS_PER_TABLE):
             if random.random() < noise_threshold:
-                t.info, _ = corrompe_campo(t.info)
+                t().info, _ = corrompe_campo(t().info)
                 noise = True
-            cmd_insert = gera_sql(t.info, tables_name[index])
+            cmd_insert = gera_sql(t().info, tables_name[index])
             id_reg = query_prod(cmd_insert)[0][0]
 
             if noise:
@@ -61,23 +60,17 @@ def populate_postgre_streaming():
     Populate postgree db streaming
     :return:
     """
-
-    tables_name = ['BASECOMPRASECM_DDL']
-    tables = [BASECOMPRASECM_DDL()]
     noise = False
+    t = BASECOMPRASECM_DDL()
+    if random.random() < noise_threshold:
+        t.info, _ = corrompe_campo(t.info)
+        noise = True
+    cmd_insert = gera_sql(t.info, 'BASECOMPRASECM_DDL')
+    id_reg = query_prod(cmd_insert)[0][0]
 
-    for index, t in enumerate(tables):
-        for i in range(QUANTITY_RECORDS_PER_TABLE):
-            if random.random() < noise_threshold:
-                t.info, _ = corrompe_campo(t.info)
-                noise = True
-            cmd_insert = gera_sql(t.info, tables_name[index])
-            id_reg = query_prod(cmd_insert)[0][0]
-
-            if noise:
-                sql = f'insert into register_noise (id_input_with_noise, provider) values ({id_reg}, \'{os.environ["PROVIDER"]}\') returning ID'
-                query_admin(sql)
-                noise = False
+    if noise:
+        sql = f'insert into register_noise (id_input_with_noise, provider) values ({id_reg}, \'{os.environ["PROVIDER"]}\') returning ID'
+        query_admin(sql)
 
 
 def populate_mongodb():
@@ -104,7 +97,7 @@ def populate_mongodb():
     print("-- MONGODB INSERTS END --")
 
 
-def run_data_streaming(delay=5):
+def run_data_streaming(delay=3):
     print("-- INIT KAFKA --")
     kafka_client = KafkaClient()
 
@@ -134,14 +127,9 @@ def run():
     print(envs)
     kafka_client.send_json("logs", envs)
 
-    if 'True' in os.environ.get('RUN_INSERTS_POSTGRES'):
-        populate_postgre()
-
-    if 'True' in os.environ.get('RUN_INSERTS_MONGO'):
-        populate_mongodb()
-
-    if 'True' in os.environ.get('RUN_PUBLISHER'):
-        run_data_streaming()
+    populate_postgre()
+    populate_mongodb()
+    run_data_streaming()
 
 
 if __name__ == '__main__':
