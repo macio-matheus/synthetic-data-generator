@@ -1,4 +1,4 @@
-CREATE DATABASE boticario_admin
+CREATE DATABASE btdb_admin
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -7,12 +7,12 @@ CREATE DATABASE boticario_admin
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
-\c boticario_admin
+\c btdb_admin
 
 CREATE TABLE REGISTER_NOISE(
-	ID						  serial,
-	ID_INPUT_WITH_NOISE                    VARCHAR(50),
-	PROVIDER                         VARCHAR(50)
+	ID		       serial,
+	ID_INPUT_WITH_NOISE    VARCHAR(50),
+	PROVIDER               VARCHAR(50)
 );
 
 ALTER TABLE REGISTER_NOISE ADD CONSTRAINT REGISTER_NOISE_PK PRIMARY KEY ( ID );
