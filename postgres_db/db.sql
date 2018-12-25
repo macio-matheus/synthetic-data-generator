@@ -1,4 +1,4 @@
-CREATE DATABASE boticario
+CREATE DATABASE btdb
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -7,7 +7,7 @@ CREATE DATABASE boticario
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
-\c boticario
+\c btdb
 
 /*
 CA_CICLOS_DDL
