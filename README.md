@@ -61,10 +61,3 @@ docker-compose up -d --build
     - 27017 => MongoDB
     - 9092 => Kafka
 ```
-
-#### Topics
-```sh
-    BASECOMPRASPDV_DDL
-    BASECONSUMIDOR_BOT_DDL
-    SELLOUT_TB_LOJA_VENDA_SO_DDL
-```
